@@ -1,0 +1,42 @@
+{
+  "name": "@graphile-contrib/constraint-error-tags",
+  "version": "1.0.0",
+  "description": "A PostGraphile plugin for writing nicer error messages on constraints.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphile-contrib/constraint-error-tags.git"
+  },
+  "keywords": [
+    "graphile",
+    "postgraphile",
+    "plugin",
+    "pg",
+    "constraints",
+    "error",
+    "smart-comment"
+  ],
+  "author": "Denis Badurina <badurinadenis@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graphile-contrib/constraint-error-tags/issues"
+  },
+  "homepage": "https://github.com/graphile-contrib/constraint-error-tags#readme",
+  "files": [
+    "index.js",
+    "src"
+  ],
+  "peerDependencies": {
+    "postgraphile": "^4.5.5"
+  },
+  "dependencies": {
+    "pg": "^7.18.1"
+  },
+  "devDependencies": {
+    "graphql": "^14.6.0"
+  }
+}
