@@ -4,8 +4,8 @@
  *
  */
 
-import { withPgClient } from "../withPgClient";
-import { parseTags } from "../parseTags";
+const { withPgClient } = require("../withPgClient");
+const { parseTags } = require("../parseTags");
 
 let constraintsWithErrorTags;
 

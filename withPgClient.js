@@ -7,7 +7,7 @@
  *
  */
 
-import { Client, Pool } from "pg";
+const { Client, Pool } = require("pg");
 
 function constructorName(obj) {
   return obj && typeof obj.constructor === "function" && obj.constructor.name;
