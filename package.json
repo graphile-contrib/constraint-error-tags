@@ -26,7 +26,10 @@
     "url": "https://github.com/graphile-contrib/constraint-error-tags/issues"
   },
   "homepage": "https://github.com/graphile-contrib/constraint-error-tags#readme",
-  "files": ["index.js", "src"],
+  "files": [
+    "index.js",
+    "src"
+  ],
   "peerDependencies": {
     "postgraphile": "^4.5.5"
   },
