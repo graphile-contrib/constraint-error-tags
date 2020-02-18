@@ -26,15 +26,12 @@
     "url": "https://github.com/graphile-contrib/constraint-error-tags/issues"
   },
   "homepage": "https://github.com/graphile-contrib/constraint-error-tags#readme",
-  "files": [
-    "index.js",
-    "src"
-  ],
+  "files": ["index.js", "src"],
   "peerDependencies": {
     "postgraphile": "^4.5.5"
   },
   "dependencies": {
-    "pg": "^7.18.1"
+    "pg": ">=6.5 <8"
   },
   "devDependencies": {
     "graphql": "^14.6.0"
