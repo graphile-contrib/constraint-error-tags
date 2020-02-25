@@ -1,6 +1,6 @@
 {
   "name": "@graphile-contrib/constraint-error-tags",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A PostGraphile plugin for writing nicer error messages on constraints.",
   "main": "index.js",
   "types": "index.d.ts",
