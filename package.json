@@ -28,7 +28,7 @@
   "homepage": "https://github.com/graphile-contrib/constraint-error-tags#readme",
   "files": [
     "index.js",
-    "parseTags.js"
+    "parseTags.js",
     "withPgClient.js",
     "src"
   ],
