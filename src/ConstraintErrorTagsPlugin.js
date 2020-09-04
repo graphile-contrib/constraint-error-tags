@@ -4,7 +4,7 @@
  *
  */
 
-const { withPgClient, parseTags } = require("graphile-build-pg/withPgClient");
+const { withPgClient, parseTags } = require("graphile-build-pg");
 
 let constraintsWithErrorTags;
 
