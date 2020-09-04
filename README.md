@@ -21,19 +21,19 @@ yarn add @graphile-contrib/constraint-error-tags
 ```js
 const {
   ConstraintErrorTagsPlugin,
-  parseErrors
+  handleErrors,
 } = require("@graphile-contrib/constraint-error-tags");
 
 app.use(
   postgraphile(process.env.POSTGRES_ENDPOINT, process.env.POSTGRES_SCHEMA, {
     appendPlugins: [ConstraintErrorTagsPlugin],
-    handleErrors: errors => parseErrors(errors)
+    handleErrors: (errors) => handleErrors(errors),
   })
 );
 ```
 
 - `ConstraintErrorTagsPlugin` introspects all your constraints and extracts the ones with the `@error <message>` smart tag.
-- `parseErrors` violating a constraint with the above mentioned signature will replace the generic error with the `<message>` from the `@error` smart tag.
+- `handleErrors` violating a constraint with the above mentioned signature will replace the generic error with the `<message>` from the `@error` smart tag.
 
 ## Example:
 

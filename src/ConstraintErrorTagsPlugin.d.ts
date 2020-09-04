@@ -14,6 +14,6 @@ export function errorForConstraint(
   constraint: null
 ): string | null;
 
-export function parseErrors(
+export function handleErrors(
   errors: readonly GraphQLError[]
 ): GraphQLErrorExtended[];

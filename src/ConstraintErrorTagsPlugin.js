@@ -45,7 +45,7 @@ function errorForConstraint(table, constraint) {
   return (con && con.error) || null;
 }
 
-function parseErrors(errors) {
+function handleErrors(errors) {
   return errors.map((err) => {
     const { originalError } = err;
     const { table, constraint } = originalError || {};
@@ -65,5 +65,5 @@ function parseErrors(errors) {
 module.exports = {
   ConstraintErrorTagsPlugin,
   errorForConstraint,
-  parseErrors,
+  handleErrors,
 };
