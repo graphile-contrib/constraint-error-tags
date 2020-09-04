@@ -4,7 +4,7 @@
  *
  */
 
-import { Plugin } from "postgraphile";
+import { Plugin, GraphQLErrorExtended } from "postgraphile";
 import { GraphQLError } from "graphql";
 
 export const ConstraintErrorTagsPlugin: Plugin;
@@ -15,5 +15,5 @@ export function errorForConstraint(
 ): string | null;
 
 export function parseErrors(
-  errors: ReadonlyArray<GraphQLError>
-): ReadonlyArray<GraphQLError>;
+  errors: readonly GraphQLError[]
+): GraphQLErrorExtended[];

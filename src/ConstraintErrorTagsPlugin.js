@@ -4,13 +4,12 @@
  *
  */
 
-const { withPgClient } = require("../withPgClient");
-const { parseTags } = require("../parseTags");
+const { withPgClient, parseTags } = require("graphile-build-pg/withPgClient");
 
 let constraintsWithErrorTags;
 
 async function ConstraintErrorTagsPlugin(_, { pgConfig }) {
-  await withPgClient(pgConfig, async pgClient => {
+  await withPgClient(pgConfig, async (pgClient) => {
     const { rows } = await pgClient.query(`
     select
       cls.relname as "table",
@@ -32,7 +31,7 @@ async function ConstraintErrorTagsPlugin(_, { pgConfig }) {
         }
         return {
           ...rest,
-          error
+          error,
         };
       })
       .filter(({ error }) => Boolean(error));
@@ -41,13 +40,13 @@ async function ConstraintErrorTagsPlugin(_, { pgConfig }) {
 
 function errorForConstraint(table, constraint) {
   const con = constraintsWithErrorTags.find(
-    con => con.table === table && con.constraint === constraint
+    (con) => con.table === table && con.constraint === constraint
   );
   return (con && con.error) || null;
 }
 
 function parseErrors(errors) {
-  return errors.map(err => {
+  return errors.map((err) => {
     const { originalError } = err;
     const { table, constraint } = originalError || {};
     if (table && constraint) {
@@ -55,7 +54,7 @@ function parseErrors(errors) {
       if (message) {
         return {
           ...err,
-          message
+          message,
         };
       }
     }
@@ -66,5 +65,5 @@ function parseErrors(errors) {
 module.exports = {
   ConstraintErrorTagsPlugin,
   errorForConstraint,
-  parseErrors
+  parseErrors,
 };
