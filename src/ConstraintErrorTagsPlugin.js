@@ -24,15 +24,18 @@ async function ConstraintErrorTagsPlugin(_, { pgConfig }) {
     constraintsWithErrorTags = rows
       .map(({ description, ...rest }) => {
         const error = parseTags(description).tags.error;
-        if (typeof error !== "string") {
-          throw new Error(
-            `ConstraintErrorTagsPlugin: expected error smart tag on "${rest.constraint}" to be a string, but got: ${error}.`
-          );
+        if (error) {
+          if (typeof error !== "string") {
+            throw new Error(
+              `ConstraintErrorTagsPlugin: expected error smart tag on "${rest.constraint}" to be a string, but got: ${error}.`
+            );
+          }
+          return {
+            ...rest,
+            error,
+          };
         }
-        return {
-          ...rest,
-          error,
-        };
+        return rest;
       })
       .filter(({ error }) => Boolean(error));
   });
