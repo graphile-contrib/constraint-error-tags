@@ -11,7 +11,7 @@ export const ConstraintErrorTagsPlugin: Plugin;
 
 export function errorForConstraint(
   table: string,
-  constraint: null
+  constraint: string
 ): string | null;
 
 export function handleErrors(
