@@ -13,10 +13,12 @@ async function ConstraintErrorTagsPlugin(_, { pgConfig }) {
     const { rows } = await pgClient.query(`
     select
       cls.relname as "table",
+      typ.typname as "type",
       con.conname as "constraint",
       dsc.description as "description"
     from pg_catalog.pg_constraint as con
-      inner join pg_catalog.pg_class as cls on cls.oid = con.conrelid
+      left join pg_catalog.pg_class as cls on cls.oid = con.conrelid
+      left join pg_catalog.pg_type as typ on typ.oid = con.contypid
       -- we inner join pg_description because we want only constraints with descriptions
       inner join pg_catalog.pg_description as dsc on dsc.objoid = con.oid
     where con.contype in ('f', 'p', 'u', 'c')`);
@@ -41,9 +43,16 @@ async function ConstraintErrorTagsPlugin(_, { pgConfig }) {
   });
 }
 
-function errorForConstraint(table, constraint) {
+function errorForTableConstraint(table, constraint) {
   const con = constraintsWithErrorTags.find(
     (con) => con.table === table && con.constraint === constraint
+  );
+  return (con && con.error) || null;
+}
+
+function errorForTypeConstraint(type, constraint) {
+  const con = constraintsWithErrorTags.find(
+    (con) => con.type === type && con.constraint === constraint
   );
   return (con && con.error) || null;
 }
@@ -51,9 +60,14 @@ function errorForConstraint(table, constraint) {
 function handleErrors(errors) {
   return errors.map((err) => {
     const { originalError } = err;
-    const { table, constraint } = originalError || {};
-    if (table && constraint) {
-      const message = errorForConstraint(table, constraint);
+    const { table, dataType, constraint } = originalError || {};
+    if (constraint) {
+      if (table) {
+        var message = errorForTableConstraint(table, constraint);
+      }
+      if (dataType) {
+        var message = errorForTypeConstraint(dataType, constraint);  
+      }
       if (message) {
         return {
           ...err,
@@ -67,6 +81,7 @@ function handleErrors(errors) {
 
 module.exports = {
   ConstraintErrorTagsPlugin,
-  errorForConstraint,
+  errorForTableConstraint,
+  errorForTypeConstraint,
   handleErrors,
 };
